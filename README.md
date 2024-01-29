@@ -1,2 +1,2 @@
 # SpaceShmup
-A basic shoot-em-up done in 3D Game development
+A basic 3D shoot-em-up done in Unity using C#
