@@ -3,3 +3,8 @@ Date: 1/17/2024
 Book: Introduction to Game Design, Prototyping and Development
 URL: https://book.prototools.net/chapter-31-space-shmup-p1-3e/
 Import File: IGDPD3.31_Space_SHMUP_Starter_Kit-2020.3
+
+Start Screen Art: Night Cafe Studio
+Date: 1/30/2024
+URL: https://creator.nightcafe.studio/creation/vORWtzKz4Gvv5b2e8kPL
+Import File: vORWtzKz4Gvv5b2e8kPL--1--sae98
