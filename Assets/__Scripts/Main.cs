@@ -16,12 +16,17 @@ public class Main : MonoBehaviour
     // Inset from the sides
     public float enemyInsetDefault = 1.5f;
 
-    public float gameRestartDelay = 2f;
+    public float gameRestartDelay = 5f;
+
+    public bool isScreen = false;
 
     private BoundsCheck bndCheck;
 
     private void Awake()
     {
+        if (isScreen)
+            Invoke(nameof(ScreenLoader), 3f);
+
         S = this;
 
         // GameObject
@@ -67,11 +72,16 @@ public class Main : MonoBehaviour
     void Restart()
     {
         // Reload __Scene_0 to restart game
-        SceneManager.LoadScene("__Scene_0");
+        SceneManager.LoadScene("_GameOver");
     }
 
     static public void HERO_DIED()
     {
         S.DelayedRestart();
+    }
+
+    void ScreenLoader()
+    {
+        SceneManager.LoadScene("_Start");
     }
 }

@@ -325,6 +325,7 @@ MonoBehaviour:
   enemySpawnPerSecond: 0.5
   enemyInsetDefault: 1.5
   gameRestartDelay: 2
+  isScreen: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
