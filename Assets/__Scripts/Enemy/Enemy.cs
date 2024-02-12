@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     // Points earned for this enemy
     public int score = 100;
 
-    private BoundsCheck bndCheck;
+    protected BoundsCheck bndCheck;
 
     void Awake()
     {

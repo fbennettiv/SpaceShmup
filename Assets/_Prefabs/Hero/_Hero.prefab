@@ -171,7 +171,9 @@ MonoBehaviour:
   speed: 30
   rollMult: -30
   pitchMult: 30
-  shieldLevel: 1
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 40
+  _shieldLevel: 1
 --- !u!114 &4619780118922718432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boundsType: 1
   radius: 4
-  keepOnScreen: 1
+  keepOnScreen: 0
   screenLocs: 0
   camWidth: 30
   camHeight: 40
