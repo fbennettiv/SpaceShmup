@@ -14,17 +14,16 @@ public class Utils : MonoBehaviour
      /// <param name="u"> The amount of interpolation [0...1] </param>
      /// <param name="points"> An array of Vector3s to interpolate </param>
      
-    static public Vector3 Brezier(float u, params Vector3[] points)
+    static public Vector3 Bezier(float u, params Vector3[] points)
     {
         // Setup array and list
         Vector3[,] vArr = new Vector3[points.Length, points.Length];
-        List<Vector3> vList = new List<Vector3>();
 
         // File the last row of vArr with the elements of vList
         int r = points.Length - 1;
         for(int c = 0; c < points.Length; c++)
         {
-            vArr[r,c] = vList[c];
+            vArr[r,c] = points[c];
         }
 
         // Iterate over all remaining rows and interpolate points at each one
