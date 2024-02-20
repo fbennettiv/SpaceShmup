@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
@@ -56,16 +57,28 @@ public class Enemy : MonoBehaviour
     {
         GameObject otherGO = collider.gameObject;
 
-        if (otherGO.GetComponent<ProjectileHero>() != null)
+        // Check for collision with ProjectileHero
+        ProjectileHero p = otherGO.GetComponent<ProjectileHero>();
+
+        if (p != null)
         {
-            Destroy(otherGO);
-            Destroy(gameObject);
+            // Only damage this Enemy if it's on screen
+            if (bndCheck.isOnScreen)
+            {
+                // Get the damage amount from the Main WEAP_DICT
+                health -= Main.GET_WEAPON_DEFINITION(p.type).damageOnHit;
+
+                if (health <= 0)
+                    Destroy(this.gameObject);
+            }
+
+            // Destroy the ProjectileHero regardless
+            Destroy(this.gameObject);
         }
         else
         {
-            Debug.Log("Enemy hit by non-ProjectileHero: " 
-                + otherGO.name);
+            print("Enemy hit by non-ProjectileHero: " +
+                otherGO.name);
         }
-
     }
 }
