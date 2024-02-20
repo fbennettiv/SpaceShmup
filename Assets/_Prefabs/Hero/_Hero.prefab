@@ -188,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boundsType: 1
   radius: 4
-  keepOnScreen: 0
+  keepOnScreen: 1
   screenLocs: 0
   camWidth: 30
   camHeight: 40
