@@ -65,22 +65,22 @@ public class PowerUp : MonoBehaviour
 
     void Update()
     {
-        cube.transform.rotation = Quaternion.Euler(
-       rotPerSecond * Time.time); // f
+        cube.transform.rotation = Quaternion.Euler(rotPerSecond * Time.time);
 
         // Fade out the PowerUp over time
         // Given the default values, a PowerUp will exist for 10 seconds
 
         // and then fade out over 4 seconds.
         float u = (Time.time - (birthTime + lifeTime)) / fadeTime;
+
         // If u >= 1, destroy this PowerUp 
         if (u >= 1)
         {
             Destroy(this.gameObject);
             return;
         }
-        // If u>0, decrease the opacity (i.e., alpha) of the PowerCube & Letter
 
+        // If u>0, decrease the opacity (i.e., alpha) of the PowerCube & Letter
         if (u > 0)
         {
             Color c = cubeMat.color;
@@ -116,7 +116,8 @@ public class PowerUp : MonoBehaviour
     {
         // Grab the WeaponDefinition from Main
         WeaponDefinition def = Main.GET_WEAPON_DEFINITION(wt);
-        cubeMat.color = def.powerUpColor; // Set the color of PowerCube
+        // Set the color of PowerCube
+        cubeMat.color = def.powerUpColor; 
 
         //letter.color = def.color; // We could colorize the letter too
 
@@ -124,8 +125,7 @@ public class PowerUp : MonoBehaviour
         letter.text = def.letter;
 
         // Finally actually set the type
-        type = wt;
-
+        _type = wt;
     }
 
     /// <summary>

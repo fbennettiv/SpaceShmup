@@ -99,7 +99,7 @@ MonoBehaviour:
   score: 100
   powerUpDropChance: 0.5
   waveFrequency: 2
-  waveWidth: 4
+  waveWidth: 6
   waveRotY: 45
 --- !u!114 &-3143388776246325161
 MonoBehaviour:

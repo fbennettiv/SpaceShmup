@@ -117,13 +117,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef23747f1a8022440916b1a364c28642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   fireRate: 0.3
   health: 10
   score: 100
   powerUpDropChance: 0.75
-  lifeTime: 10
-  sinEccentricity: 0.6
+  lifeTime: 10.5
+  sinEccentricity: 1.5
   rotCurve:
     serializedVersion: 2
     m_Curve:

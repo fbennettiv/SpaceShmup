@@ -11,6 +11,7 @@ public class Main : MonoBehaviour
     static private Dictionary<eWeaponType, WeaponDefinition> WEAP_DICT;
 
     [Header("Inscribed")]
+    public bool isScreen = false;
     public bool spawnEnemies = true;
     // Array of Enemy prefabs
     public GameObject[] prefabEnemies;
@@ -28,7 +29,7 @@ public class Main : MonoBehaviour
                                             eWeaponType.spread, eWeaponType.shield };
 
 
-    public bool isScreen = false;
+    
 
     private BoundsCheck bndCheck;
 

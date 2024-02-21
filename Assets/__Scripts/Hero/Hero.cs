@@ -117,11 +117,11 @@ public class Hero : MonoBehaviour
                         // Set it to pUp.type
                         weap.SetType(powerUp.type);
                     }
-                    else
-                    {
-                        ClearWeapons();
-                        weapons[0].SetType(powerUp.type);
-                    }
+                }
+                else
+                {
+                    ClearWeapons();
+                    weapons[0].SetType(powerUp.type);
                 }
                 break;
         }

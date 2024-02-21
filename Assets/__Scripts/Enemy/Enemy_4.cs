@@ -70,6 +70,7 @@ public class Enemy_4 : Enemy
         // Simple linear interpolation
         pos = (1 - u) * p0 + u * p1;
     }
+
     /// <summary>
     /// Enemy_4 Collisions are handled differently from other Enemy subclasses
     /// to enable protection by EnemyShields.
@@ -80,8 +81,7 @@ public class Enemy_4 : Enemy
         GameObject otherGO = coll.gameObject;
 
         // Make sure this was hit by a ProjectileHero
-        ProjectileHero p =
-       otherGO.GetComponent<ProjectileHero>();
+        ProjectileHero p = otherGO.GetComponent<ProjectileHero>();
         if (p != null)
         {
             // Destroy the ProjectileHero regardless of bndCheck.isOnScreen

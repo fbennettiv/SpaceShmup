@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 8396276687257666663}
   - component: {fileID: 6816901444977003808}
   - component: {fileID: 8099545562180534161}
+  - component: {fileID: -17209914684489712}
   m_Layer: 12
   m_Name: PowerUp
   m_TagString: Untagged
@@ -244,9 +245,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2b1afc939ddfc4d9b4ddb1651058f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundsType: 1
+  boundsType: 2
   radius: 1
-  keepOnScreen: 1
+  keepOnScreen: 0
   screenLocs: 0
   camWidth: 0
   camHeight: 0
+--- !u!114 &-17209914684489712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2947631247287417476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8df031de6b7da34297c0f6f537eac4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotMinMax: {x: 15, y: 90}
+  driftMinMax: {x: 0.25, y: 2}
+  lifeTime: 10
+  fadeTime: 4
+  _type: 0
+  cube: {fileID: 0}
+  letter: {fileID: 0}
+  rotPerSecond: {x: 0, y: 0, z: 0}
+  birthTime: 0

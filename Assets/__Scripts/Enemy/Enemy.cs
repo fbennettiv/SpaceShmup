@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour
             }
 
             // Destroy the ProjectileHero regardless
-            Destroy(this.gameObject);
+            Destroy(otherGO);
         }
         else
         {
