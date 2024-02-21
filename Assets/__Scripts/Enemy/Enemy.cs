@@ -16,6 +16,10 @@ public class Enemy : MonoBehaviour
     public float health = 10f;
     // Points earned for this enemy
     public int score = 100;
+    // Chance to drop PowerUp
+    public float powerUpDropChance = 1f;
+
+    protected bool calledShipDestroyed = false;
 
     protected BoundsCheck bndCheck;
 
@@ -70,6 +74,11 @@ public class Enemy : MonoBehaviour
 
                 if (health <= 0)
                 {
+                    if (!calledShipDestroyed)
+                    {
+                        calledShipDestroyed = true;
+                        Main.SHIP_DESTROYED(this);
+                    }
                     Destroy(this.gameObject);
                 }
             }

@@ -19,9 +19,14 @@ public class Main : MonoBehaviour
     // Inset from the sides
     public float enemyInsetDefault = 1.5f;
 
-    public float gameRestartDelay = 5f;
+    public float gameRestartDelay = 2f;
+    public GameObject prefabPowerUp;
 
     public WeaponDefinition[] weaponDefinitions;
+    public eWeaponType[] powerUpFrequency = new eWeaponType[]{
+                                            eWeaponType.blaster, eWeaponType.blaster,
+                                            eWeaponType.spread, eWeaponType.shield };
+
 
     public bool isScreen = false;
 
@@ -63,7 +68,7 @@ public class Main : MonoBehaviour
 
         // Position the Enemy above the screen with a random x position
         float enemyInset = enemyInsetDefault;
-        
+
         if (go.GetComponent<BoundsCheck>() != null)
         {
             enemyInset = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
@@ -118,6 +123,32 @@ public class Main : MonoBehaviour
         // If no entry of the correct type exists in WEAP_DICT, return a new
         // WeaponDefinition with a type of eWeaponType.none (default value)
         return new WeaponDefinition();
+    }
+
+    /// <summary>
+    /// Called by an Enemy ship when it is destroyed. 
+    /// Someimtes creates a powerUp in place of ship.
+    /// </summary>
+    /// <param name="e"> The enemy that is destroyed </param>
+    static public void SHIP_DESTROYED(Enemy e)
+    {
+        // Potentially generates PowerUp
+        if (Random.value <= e.powerUpDropChance)
+        {
+            // Choose a PowerUp from the possibilities in PowerUpFreq
+            int ndx = Random.Range(0, S.powerUpFrequency.Length);
+            eWeaponType pUpType = S.powerUpFrequency[ndx];
+
+            // Spawn a PowerUp
+            GameObject go = Instantiate<GameObject>(S.prefabPowerUp);
+            PowerUp pUp = go.GetComponent<PowerUp>();
+
+            // Set it to proper WeaponType
+            pUp.SetType(pUpType);
+
+            // Set it to the position of the destroyed ship
+            pUp.transform.position = e.transform.position;
+        }
     }
 
     void ScreenLoader()
