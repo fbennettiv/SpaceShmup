@@ -69,7 +69,9 @@ public class Enemy : MonoBehaviour
                 health -= Main.GET_WEAPON_DEFINITION(p.type).damageOnHit;
 
                 if (health <= 0)
+                {
                     Destroy(this.gameObject);
+                }
             }
 
             // Destroy the ProjectileHero regardless
