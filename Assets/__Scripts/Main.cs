@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Main : MonoBehaviour
 {
-    // Pirvate singleton for Main
+    // Private singleton for Main
     static private Main S;
 
     static private Dictionary<eWeaponType, WeaponDefinition> WEAP_DICT;
 
     [Header("Inscribed")]
     public bool isScreen = false;
+    public bool isWaves = false;
+    public int wLvl = 1;
     public bool spawnEnemies = true;
     // Array of Enemy prefabs
     public GameObject[] prefabEnemies;
@@ -54,6 +57,28 @@ public class Main : MonoBehaviour
         }
     }
 
+    void Waves()
+    {
+        if (!isWaves) return;
+
+        switch (Hero.S.score)
+        {
+            case 200:
+                wLvl = 7;
+                break;
+            case 500:
+                wLvl = 4;
+                break;
+            case 1000:
+                wLvl = 1;
+                break;
+            case 1500:
+                wLvl = 0;
+
+                break;
+        }
+    }
+
     public void SpawnEnemy()
     {
         // If SpawnEnemy is false, skip to the next invoke of SpawnEnemy()
@@ -63,8 +88,20 @@ public class Main : MonoBehaviour
             return;
         }
 
+        int ndx = 0;
+        /*if (wLvl == 0)
+        {
+            ndx = 15;
+            spawnEnemies = false;
+            return;
+        }*/
+            
         // Pick a random Enemy prefab to instantiate
-        int ndx = Random.Range(0, prefabEnemies.Length);
+        if (!isWaves)
+            ndx = Random.Range(0, prefabEnemies.Length);
+        if (isWaves)
+            ndx = Random.Range(0, prefabEnemies.Length - wLvl);
+
         GameObject go = Instantiate(prefabEnemies[ndx]);
 
         // Position the Enemy above the screen with a random x position
@@ -86,23 +123,6 @@ public class Main : MonoBehaviour
 
         // Invoke SpawnEnemy() again
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
-    }
-
-    void DelayedRestart()
-    {
-        // Invoke the Restart(0 method in gameRestartDelay
-        Invoke(nameof(Restart), gameRestartDelay);
-    }
-
-    void Restart()
-    {
-        // Reload __Scene_0 to restart game
-        SceneManager.LoadScene("_GameOver");
-    }
-
-    static public void HERO_DIED()
-    {
-        S.DelayedRestart();
     }
 
     /// <summary>
@@ -128,7 +148,7 @@ public class Main : MonoBehaviour
 
     /// <summary>
     /// Called by an Enemy ship when it is destroyed. 
-    /// Someimtes creates a powerUp in place of ship.
+    /// Sometimes creates a powerUp in place of ship.
     /// </summary>
     /// <param name="e"> The enemy that is destroyed </param>
     static public void SHIP_DESTROYED(Enemy e)
@@ -155,5 +175,22 @@ public class Main : MonoBehaviour
     void ScreenLoader()
     {
         SceneManager.LoadScene("_Start");
+    }
+
+    void DelayedRestart()
+    {
+        // Invoke the Restart(0 method in gameRestartDelay
+        Invoke(nameof(Restart), gameRestartDelay);
+    }
+
+    void Restart()
+    {
+        // Reload __Scene_0 to restart game
+        SceneManager.LoadScene("_GameOver");
+    }
+
+    static public void HERO_DIED()
+    {
+        S.DelayedRestart();
     }
 }

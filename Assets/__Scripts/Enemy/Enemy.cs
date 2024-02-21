@@ -80,6 +80,7 @@ public class Enemy : MonoBehaviour
                         Main.SHIP_DESTROYED(this);
                     }
                     Destroy(this.gameObject);
+                    Hero.Score(this.score);
                 }
             }
 

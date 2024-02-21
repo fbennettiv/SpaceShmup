@@ -120,7 +120,7 @@ MonoBehaviour:
   speed: 15
   fireRate: 0.3
   health: 10
-  score: 100
+  score: 75
   powerUpDropChance: 0.75
   lifeTime: 10.5
   sinEccentricity: 1.5

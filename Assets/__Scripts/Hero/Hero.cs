@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Hero : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Hero : MonoBehaviour
     static public Hero S { get; private set; }
 
     [Header("Inscribed")]
-
+    
     //Control the ship
     public float speed = 30;
     public float rollMult = -45;
@@ -21,6 +22,8 @@ public class Hero : MonoBehaviour
     [Range(0, 4)]
     [SerializeField]
     private float _shieldLevel = 1;
+    private float _score = 0;
+
 
     [Tooltip("This field holds a reference to the last triggering GameObject")]
     private GameObject lastTriggerGo = null;
@@ -141,6 +144,18 @@ public class Hero : MonoBehaviour
                 Main.HERO_DIED();
             }
         }
+    }
+
+    public float score
+    {
+        get { return _score; }
+        set { _score = value; }
+    }
+
+    static public float Score(float s)
+    {
+        S.score += s;
+        return S.score;
     }
 
     ///<summary>

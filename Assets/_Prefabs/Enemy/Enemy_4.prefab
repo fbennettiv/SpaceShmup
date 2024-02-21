@@ -1233,7 +1233,7 @@ MonoBehaviour:
   speed: 10
   fireRate: 0.3
   health: 10
-  score: 100
+  score: 200
   powerUpDropChance: 1
   duration: 4
 --- !u!114 &1035337485838800993
