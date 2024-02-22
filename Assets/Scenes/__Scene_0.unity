@@ -615,8 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isScreen: 0
-  isWaves: 0
-  wLvl: 1
+  isWaves: 1
   spawnEnemies: 1
   prefabEnemies:
   - {fileID: 8021958529402119623, guid: 2b8d313f619e6a14390b5abe0b2c0c35, type: 3}

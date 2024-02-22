@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -10,11 +11,12 @@ public class Main : MonoBehaviour
     static private Main S;
 
     static private Dictionary<eWeaponType, WeaponDefinition> WEAP_DICT;
+    // # of enemies to exclude
+    private int eLvl = 10;
 
     [Header("Inscribed")]
     public bool isScreen = false;
     public bool isWaves = false;
-    public int wLvl = 1;
     public bool spawnEnemies = true;
     // Array of Enemy prefabs
     public GameObject[] prefabEnemies;
@@ -32,7 +34,7 @@ public class Main : MonoBehaviour
                                             eWeaponType.spread, eWeaponType.shield };
 
 
-    
+
 
     private BoundsCheck bndCheck;
 
@@ -48,6 +50,7 @@ public class Main : MonoBehaviour
 
         // Invoke SpawnEnemy() once (in 2 seconds, based on default values)
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
+        Invoke(nameof(Waves), 1f / enemySpawnPerSecond);
 
         // A generic Dictionary with eWeaponType as the key
         WEAP_DICT = new Dictionary<eWeaponType, WeaponDefinition>();
@@ -57,24 +60,25 @@ public class Main : MonoBehaviour
         }
     }
 
-    void Waves()
+    public void Waves()
     {
-        if (!isWaves) return;
+        if (!isWaves)
+            return;
 
         switch (Hero.S.score)
         {
-            case 200:
-                wLvl = 7;
+            case 1 when Hero.S.score >= 100 && Hero.S.score < 500:
+                eLvl = 7;
                 break;
-            case 500:
-                wLvl = 4;
+            case 2 when Hero.S.score >= 500 && Hero.S.score < 1000:
+                eLvl = 4;
                 break;
-            case 1000:
-                wLvl = 1;
+            case 3 when Hero.S.score >= 1000 && Hero.S.score < 1500:
+                eLvl = 1;
                 break;
-            case 1500:
-                wLvl = 0;
-
+            case > 1500:
+                eLvl = 0;
+                spawnEnemies = false;
                 break;
         }
     }
@@ -89,18 +93,12 @@ public class Main : MonoBehaviour
         }
 
         int ndx = 0;
-        /*if (wLvl == 0)
-        {
-            ndx = 15;
-            spawnEnemies = false;
-            return;
-        }*/
-            
+
         // Pick a random Enemy prefab to instantiate
         if (!isWaves)
             ndx = Random.Range(0, prefabEnemies.Length);
         if (isWaves)
-            ndx = Random.Range(0, prefabEnemies.Length - wLvl);
+            ndx = Random.Range(0, prefabEnemies.Length - eLvl);
 
         GameObject go = Instantiate(prefabEnemies[ndx]);
 
@@ -122,6 +120,7 @@ public class Main : MonoBehaviour
         go.transform.position = pos;
 
         // Invoke SpawnEnemy() again
+        Invoke(nameof(Waves), 1f / enemySpawnPerSecond);
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
     }
 
